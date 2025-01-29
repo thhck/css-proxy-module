@@ -1,0 +1,43 @@
+{
+  "@context": [
+    "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^7.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/proxy-module/^7.0.0/components/context.jsonld"
+  ],
+  "import": [
+    "proxy:config/proxy.json"
+  ],
+  "@graph": [
+    {
+      "comment": [
+        "Add a /proxy endpoint to CSS",
+        "This configuration needs to be combined with a default CSS configuration to be functional."
+      ]
+    },
+		{
+      "@id": "urn:my-proxy:default:HttpHandlerOverride",
+      "@type": "Override",
+      "overrideInstance": { "@id": "urn:solid-server:default:HttpHandler" },
+      "overrideParameters": {
+        "@type": "SequenceHandler",
+        "handlers": [
+        { "@id": "urn:solid-server:default:Middleware" },
+        {
+          "@id": "urn:solid-server:default:BaseHttpHandler",
+          "@type": "WaterfallHandler",
+          "handlers": [
+            { "@id": "urn:my-proxy:default:ProxyHandler" },
+
+            { "@id": "urn:solid-server:default:StaticAssetHandler" },
+            { "@id": "urn:solid-server:default:OidcHandler" },
+            { "@id": "urn:solid-server:default:NotificationHttpHandler" },
+            { "@id": "urn:solid-server:default:StorageDescriptionHandler" },
+            { "@id": "urn:solid-server:default:AuthResourceHttpHandler" },
+            { "@id": "urn:solid-server:default:IdentityProviderHandler" },
+            { "@id": "urn:solid-server:default:LdpHandler" }
+          ]
+        }
+      ]
+      }
+    }
+  ]
+}
