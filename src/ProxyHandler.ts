@@ -14,7 +14,7 @@ export class ProxyHttpHandler extends HttpHandler {
 
     // Parse query parameters
     const url = new URL(request.url!, `http://${request.headers.host}`);
-    const name = url.searchParams.get('name');
+    const uri = url.searchParams.get('uri');
 
 
 
@@ -27,20 +27,24 @@ export class ProxyHttpHandler extends HttpHandler {
     //}
 
 
-		const who = name ? name : "world !";
+    if (!uri) {
+      response.writeHead(400, { 'Content-Type': 'application/json' });
+      response.end(JSON.stringify({ error: 'Please provide a URI' }));
+      return;
+    }
 
+    try {
+      const fetchResponse = await fetch(uri);
+      const contentType = fetchResponse.headers.get('content-type') || 'text/plain';
+      const body = await fetchResponse.text();
 
-		// json repsonse:
-
-    // const proxyResponse = {
-    //   "hello": who
-    // }
-    // response.writeHead(200, { 'Content-Type': 'application/json' });
-    // response.end(JSON.stringify(proxyResponse));
-
-    // html response:
-    response.writeHead(200, { 'Content-Type': 'text/html' });
-    response.end(`<h1> hello ${who} </h1>`)
+      response.writeHead(200, { 'Content-Type': contentType });
+      response.end(body);
+    } catch (error) {
+      this.logger.error(`Failed to fetch URI: ${error}`);
+      response.writeHead(500, { 'Content-Type': 'application/json' });
+      response.end(JSON.stringify({ error: 'Failed to fetch URI' }));
+    }
   }
 }
  
