@@ -29,7 +29,8 @@
     "config"
   ],
   "dependencies": {
-    "@solid/community-server": "^7.0.3"
+    "@solid/community-server": "^7.1.6",
+    "ip-range-check": "^0.2.0"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
