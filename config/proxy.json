@@ -9,7 +9,7 @@
       "@type": "RouterHandler",    
       "baseUrl": { "@id": "urn:solid-server:default:variable:baseUrl" },
       "targetExtractor": { "@id": "urn:solid-server:default:TargetExtractor" },
-      "allowedPathNames": [ "/proxy" ],
+      "allowedPathNames": [ "/.proxy" ],
       "handler": {
         "@type": "ProxyHttpHandler",
       }
