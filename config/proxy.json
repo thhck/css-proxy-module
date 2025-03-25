@@ -11,7 +11,7 @@
       "targetExtractor": { "@id": "urn:solid-server:default:TargetExtractor" },
       "allowedPathNames": [ "/.proxy" ],
       "handler": {
-        "@type": "ProxyHttpHandler",
+        "@type": "ProxyHttpHandler"
       }
     }
   ]

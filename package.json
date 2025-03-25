@@ -16,7 +16,7 @@
     "https://linkedsoftwaredependencies.org/bundles/npm/proxy-module/^7.0.0/dist/": "dist/"
   },
   "scripts": {
-    "start": "community-solid-server -c proxy-partial.json @css:config/file.json -f .data -m .",
+    "start": "community-solid-server -c config/proxy-partial.json @css:config/file.json -f .data -m .",
     "start-alt": "community-solid-server -c proxy-file.json -f .data -m .",
     "build": "npm run build:ts && npm run build:components",
     "build:components": "componentsjs-generator -s src -c dist/components -i .componentsignore -r proxy",
