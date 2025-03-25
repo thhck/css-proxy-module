@@ -1,6 +1,6 @@
 {
   "name": "proxy-module",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "A minimal example of a repository containing an injectable Community Solid Server module",
   "repository": "git@github.com:CommunitySolidServer/proxy-module.git",
   "main": "./dist/index.js",
@@ -22,7 +22,11 @@
     "build:components": "componentsjs-generator -s src -c dist/components -i .componentsignore -r proxy",
     "build:ts": "tsc",
     "prepare": "npm run build",
-    "test": "jest"
+    "test": "jest",
+    "version": "npm run build && git add -A dist",
+    "release:patch": "npm version patch -m 'Release %s'",
+    "release:minor": "npm version minor -m 'Release %s'",
+    "release:major": "npm version major -m 'Release %s'"
   },
   "files": [
     "dist",
